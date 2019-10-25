@@ -10,6 +10,7 @@ DATA_PATH = os.path.join(BASE_PATH, 'data')
 DRIVER_PATH = os.path.join(BASE_PATH, 'drivers')
 LOG_PATH = os.path.join(BASE_PATH, 'log')
 REPORT_PATH = os.path.join(BASE_PATH, 'report')
+SCREENSHOT_DIR=os.path.join(BASE_PATH, 'screenpicture')
 
 class Config:
     def __init__(self, config=CONFIG_FILE):

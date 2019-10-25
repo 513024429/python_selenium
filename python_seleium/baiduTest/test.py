@@ -13,12 +13,14 @@ from utils.config import Config
 from selenium.webdriver.common.action_chains import ActionChains
 class testBaiDu():
     URL = Config().get('URL')
-
     locator_kw = (By.ID, 'kw')
     locator_su = (By.ID, 'su')
     locator_soutu_btn=(By.CLASS_NAME, 'soutu-btn')
     locator_result = (By.XPATH, '//div[contains(@class, "result")]/h3/a')
-
+    locator_upload_pic=(By.CLASS_NAME, 'upload-pic')
+    locator_search=(By.XPATH,'/html/body/div[1]/div[7]/div/div/ul/li[2]')
+    locator_search_setting=(By.LINK_TEXT, '搜索设置')
+    locator_setting=(By.LINK_TEXT, '设置')
     def open(self,broser):
         if broser=='FF':
             self.driver = webdriver.Firefox()
@@ -49,16 +51,16 @@ class testBaiDu():
     def test_search_2(self):
         self.driver.find_element(*self.locator_soutu_btn).click()
         time.sleep(1)
-        self.driver.find_element(By.CLASS_NAME, 'upload-pic').send_keys(r'C:\Users\51302\Pictures\Camera Roll\123.jpg')
+        self.driver.find_element(*self.locator_upload_pic).send_keys(r'C:\Users\51302\Pictures\Camera Roll\123.jpg')
         time.sleep(10)
     def test_search_3(self,setting1='',setting2='',setting3='',setting4=''):
 #         self.driver.find_element(By.LINK_TEXT, '设置').click()
-        move=self.driver.find_element(By.LINK_TEXT, '设置')
+        move=self.driver.find_element(*self.locator_setting)
         ActionChains(self.driver).move_to_element(move).perform()
-        self.driver.find_element(By.LINK_TEXT, '搜索设置').click()
+        self.driver.find_element(*self.locator_search_setting).click()
         time.sleep(2)
         point=self.driver.find_element_by_class_name('pftab_hd')
-        self.driver.find_element_by_xpath('/html/body/div[1]/div[7]/div/div/ul/li[2]').click()
+        self.driver.find_element(*self.locator_search).click()
         if setting1!='':
             self.driver.find_element(By.NAME, 'q1').send_keys(setting1)
         if setting2!='':
